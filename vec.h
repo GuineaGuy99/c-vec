@@ -30,7 +30,7 @@
 #include <stdlib.h>
 
 /*
-	Version 1.0.0
+	Version 1.0.1
 	GitHub https://github.com/GuineaGuy99/c-vec
 
 	##########################
@@ -80,7 +80,7 @@
 
 #define VEC_VERSION_MAJOR 1
 #define VEC_VERSION_MINOR 0
-#define VEC_VERSION_PATCH 0
+#define VEC_VERSION_PATCH 1
 
 /*=======*/
 /* types */
