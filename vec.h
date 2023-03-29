@@ -125,8 +125,8 @@ typedef struct
 #define vec_deinit(vec) VEC_FREE(vec__has_header(vec) ? vec__get_header(vec) : NULL)
 #define vec_len(vec) (vec__has_header(vec) ? vec__get_header(vec)->len : 0)
 #define vec_cap(vec) (vec__has_header(vec) ? vec__get_header(vec)->cap : 0)
-#define vec_reserve(vec, capacity) vec__reserve_or_fail(vec, capacity, { VEC_PANIC("vec_reserve out of memory"); });
-#define vec_try_reserve(vec, capacity) vec__reserve_or_fail(vec, capacity, { errno = ENOMEM; });
+#define vec_reserve(vec, capacity) vec__reserve_or_fail(vec, capacity, { VEC_PANIC("vec_reserve out of memory"); })
+#define vec_try_reserve(vec, capacity) vec__reserve_or_fail(vec, capacity, { errno = ENOMEM; })
 #define vec__has_header(vec) (*(vec) != NULL)
 #define vec__get_header(vec) (((vec__header_t*)*(vec)) - 1) // warning: UB if !vec__has_header
 #define vec__set_header(vec, header) (*(vec) = (void*)((header) + 1))
@@ -186,14 +186,14 @@ typedef struct
 		vec__get_header(vec)->len -= 1;                \
 	} while (0)
 
-#define vec_pop_with(vec, deinit_fn)                       \
-	do                                                     \
-	{                                                      \
-		VEC_ASSERT(vec_len(vec) > 0, "vec_pop_with empty") \
-		/* assert guarantees header */                     \
-		vec__header_t *_vec_header = vec__get_header(vec); \
-		_vec_header->len -= 1;                             \
-		(deinit_fn)(*(vec) + _vec_header->len);            \
+#define vec_pop_with(vec, deinit_fn)                        \
+	do                                                      \
+	{                                                       \
+		VEC_ASSERT(vec_len(vec) > 0, "vec_pop_with empty"); \
+		/* assert guarantees header */                      \
+		vec__header_t *_vec_header = vec__get_header(vec);  \
+		_vec_header->len -= 1;                              \
+		(deinit_fn)(*(vec) + _vec_header->len);             \
 	} while (0)
 
 #define vec_clear(vec)                                         \
