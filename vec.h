@@ -257,19 +257,19 @@ typedef struct
 		}                                                                           \
 	} while (0)
 
-#define vec_remove_shift_at_with(vec, index, deinit_fn)                                 \
-	do                                                                                  \
-	{                                                                                   \
-		size_t _vec_index = (index);                                                    \
-		VEC_ASSERT(_vec_index < vec_len(vec), "vec_remove_swap_at_with out of bounds"); \
-		/* assert guarantees header */                                                  \
-		vec__header_t *_vec_header = vec__get_header(vec);                              \
-		_vec_header->len -= 1;                                                          \
-		(deinit_fn)(*(vec) + _vec_index);                                               \
-		for (size_t _vec_i=_vec_index; _vec_i<_vec_header->len; _vec_i++)               \
-		{                                                                               \
-			(*(vec))[_vec_i] = (*(vec))[_vec_i+1];                                      \
-		}                                                                               \
+#define vec_remove_shift_at_with(vec, index, deinit_fn)                                  \
+	do                                                                                   \
+	{                                                                                    \
+		size_t _vec_index = (index);                                                     \
+		VEC_ASSERT(_vec_index < vec_len(vec), "vec_remove_shift_at_with out of bounds"); \
+		/* assert guarantees header */                                                   \
+		vec__header_t *_vec_header = vec__get_header(vec);                               \
+		_vec_header->len -= 1;                                                           \
+		(deinit_fn)(*(vec) + _vec_index);                                                \
+		for (size_t _vec_i=_vec_index; _vec_i<_vec_header->len; _vec_i++)                \
+		{                                                                                \
+			(*(vec))[_vec_i] = (*(vec))[_vec_i+1];                                       \
+		}                                                                                \
 	} while (0)
 
 #define vec__grow_or_fail(vec, ...)                                                                                   \
