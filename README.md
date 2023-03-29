@@ -1384,7 +1384,6 @@ int main(int argc, char **argv)
 
 <div dir="rtl">[<a href="#documentation">Back to top</a>]</div>
 
-
 # vec__has_header <a id="vec--has-header"/>
 
 ⚠️ **This exists for internal use and may be removed without warning. Use at your own risk.** ⚠️ 
@@ -1480,6 +1479,8 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
+
+<div dir="rtl">[<a href="#documentation">Back to top</a>]</div>
 
 # vec__set_header <a id="vec--set-header"/>
 
